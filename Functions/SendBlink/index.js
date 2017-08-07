@@ -20,7 +20,6 @@ module.exports = function (context, req) {
             context.log('Client connected');
         
             // Create a message and send it to the device
-            // var data = JSON.stringify(jsonMessage);
             var data = myReq.msg;
             var message = new Message(data);
             context.log('Sending message: ' + message.getData() + ' to: ' + targetDevice);
