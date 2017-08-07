@@ -1,8 +1,9 @@
 'use strict';
+require('dotenv').config();
+
 var clientFromConnectionString = require('azure-iot-device-mqtt').clientFromConnectionString;
 var Message = require('azure-iot-device').Message;
 var exec = require('nexecp').exec;
-require('dotenv').config();
 
 // Get messages from Azure IoT Hub
 // https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-node-node-c2d
