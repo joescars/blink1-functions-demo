@@ -2,10 +2,13 @@
   "disabled": false,
   "bindings": [
     {
-      "authLevel": "function",
+      "authLevel": "anonymous",
       "type": "httpTrigger",
       "direction": "in",
-      "name": "req"
+      "name": "req",
+      "methods": [
+        "post"
+      ]      
     },
     {
       "type": "http",

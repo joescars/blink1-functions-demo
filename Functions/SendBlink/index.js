@@ -1,18 +1,41 @@
-module.exports = function (context, req) {
-    context.log('JavaScript HTTP trigger function processed a request.');
+var Client = require('azure-iothub').Client;
+var Message = require('azure-iot-common').Message;
 
-    if (req.query.name || (req.body && req.body.name)) {
-        context.res = {
-            // status: 200, /* Defaults to 200 */
-            body: "Hello " + (req.query.name || req.body.name)
-        };
-    }
-    else {
-        context.res = {
-            status: 400,
-            body: "Please pass a name on the query string or in the request body"
-        };
-    }
-    context.done();
-    
+var connectionString = process.env.IoTHubConnection;
+var targetDevice = 'blinksim';
+
+module.exports = function (context, req) {
+
+    context.log('Send Blink Trigger Started');
+
+    if (typeof req.body != 'undefined' && typeof req.body == 'object') {
+
+        var myReq = req.body;
+
+        var client = Client.fromConnectionString(connectionString);
+        client.open(function (err) {
+        if (err) {
+            context.log('Could not connect: ' + err.message);
+        } else {
+            context.log('Client connected');
+        
+            // Create a message and send it to the device
+            // var data = JSON.stringify(jsonMessage);
+            var data = myReq.msg;
+            var message = new Message(data);
+            context.log('Sending message: ' + message.getData() + ' to: ' + targetDevice);
+            client.send(targetDevice, message, printResultFor('send', context));
+        }
+        context.done();
+        });
+
+    }    
+
 };
+
+function printResultFor(op, context) {
+    return function printResult(err, res) {
+        if (err) context.log(op + ' error: ' + err.toString());
+        if (res) context.log(op + ' status: ' + res.constructor.name);
+    };
+}
