@@ -9,6 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "azure-event-hubs": "0.0.8",
+    "azure-iot-device": "^1.1.17",
+    "azure-iot-device-mqtt": "^1.1.17",
+    "azure-iothub": "^1.1.14",
+    "dotenv": "^4.0.0",
     "nexecp": "^0.1.3"
   }
 }
