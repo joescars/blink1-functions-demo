@@ -1,6 +1,6 @@
 # blink(1) Azure Functions / Logic App / IoT Hub Demo # 
 
-In Progress... Readme coming soon. 
+In Progress...
 
 ![Blink Aniamtion](_static/light-ani.gif)
 
@@ -15,14 +15,26 @@ In Progress... Readme coming soon.
 
 ## Instructions (in progress) ## 
 
-This assumes your Azure Sub is active and all required programs installed. 
+### 1. Install required applications ###
 
-1. Install required applications
-2. Create IoT Hub & Setup Device
-3. Create Function App & Publish to Azure
-4. Create Logic App & Test
-5. Add additional logic apps
+Coming soon... 
+
+### 2. Create IoT Hub & Setup Device ###
+
+Coming soon... 
+
+### 3. Create Function App & Publish to Azure ###
+
+Coming soon... 
+
+### 4. Create Logic App & Send to Function ### 
+
+Coming soon... 
+
+### 5. Add additional logic apps ###
+
+Coming soon... 
 
 ## Resources ##
 
- - In progress
+ - Coming soon... 
