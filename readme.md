@@ -11,6 +11,7 @@ In Progress... Readme coming soon.
 3. [Node.js](https://nodejs.org/en/)
 4. [Azure Functions Core Tools](https://www.npmjs.com/package/azure-functions-core-tools) (optional)
 5. [blink(1) USB device](https://blink1.thingm.com/)
+6. Active [Twitter](https://www.twitter.com) Account
 
 ## Instructions (in progress) ## 
 
