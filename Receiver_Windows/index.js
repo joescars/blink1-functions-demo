@@ -6,8 +6,6 @@ var Message = require('azure-iot-device').Message;
 var exec = require('nexecp').exec;
 
 // Get messages from Azure IoT Hub
-// https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-node-node-c2d
-
 var iotHost = process.env.IOT_HOST;
 var deviceKey = process.env.DEVICE_KEY;
 var deviceId = process.env.DEVICE_ID;
@@ -30,8 +28,10 @@ var connectCallback = function (err) {
     client.on('message', function (msg) {
         console.log('Id: ' + msg.messageId + ' Body: ' + msg.data);
         client.complete(msg, printResultFor('completed'));
+        
         // Call the Blink Tool
-        blink("1,6,8,1");      
+        blink("blue");      
+
     });    
   }
 };
@@ -39,9 +39,9 @@ var connectCallback = function (err) {
 client.open(connectCallback);
 
 // Let's Blink
-function blink(pattern) {
+function blink(color) {
 
-    exec('blink1-tool --play ' + pattern).then(function(out) {
+    exec('blink1-tool --rgb ' + getrgb(color) + ' --glimmer=3').then(function(out) {
         console.log(out.stdout, out.stderr);
     }, function(err) {
         console.error(err);
@@ -49,8 +49,25 @@ function blink(pattern) {
 
 }
 
-/*
-    Blink(1) Documentation and Tooling
-    https://github.com/todbot/blink1/releases
-    https://github.com/todbot/blink1/blob/master/docs/blink1-mk2-tricks.md
-*/
+function getrgb(color) {
+  switch(color) {
+    case 'red':
+      return 'ff0000';
+      break;
+    case 'green':
+      return '008000';
+      break;
+    case 'blue':
+      return '0000ff';
+      break;  
+    case 'yellow':
+      return 'ffff00';
+      break;                  
+    case 'pink':
+      return 'ffc0cb';
+      break; 
+    default:
+      return 'ffffff';
+  }
+}
+
