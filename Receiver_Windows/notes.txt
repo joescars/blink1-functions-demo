@@ -11,6 +11,7 @@ blink1-tool -l 0 --off
 
 blink1-tool -t 300 -m 300 --rgb ff00ff --blink 2
 blink1-tool --rgb ff00ff --glimmer=3
+blink1-tool --playpattern '10,#ff00ff,0.1,0,#00ff00,0.1,0'
 
 Red     ff0000
 Blue    0000ff

@@ -13,12 +13,8 @@ var deviceId = process.env.DEVICE_ID;
 var connectionString = 'HostName=' + iotHost +';DeviceId=' + deviceId + ';SharedAccessKey=' + deviceKey;
 var client = clientFromConnectionString(connectionString);
 
-function printResultFor(op) {
-  return function printResult(err, res) {
-    if (err) console.log(op + ' error: ' + err.toString());
-    if (res) console.log(op + ' status: ' + res.constructor.name);
-  };
-}
+// blinks orange twice on load
+blinkLoaded()
 
 var connectCallback = function (err) {
   if (err) {
@@ -26,11 +22,12 @@ var connectCallback = function (err) {
   } else {
     console.log('Client connected');
     client.on('message', function (msg) {
-        console.log('Id: ' + msg.messageId + ' Body: ' + msg.data);
+        var msgText = uint8arrayToString(msg.data);
+        console.log('Id: ' + msg.messageId + ' Body: ' + msgText);
         client.complete(msg, printResultFor('completed'));
         
         // Call the Blink Tool
-        blink("blue");      
+        blink(getEventColor(msgText));      
 
     });    
   }
@@ -49,25 +46,43 @@ function blink(color) {
 
 }
 
-function getrgb(color) {
-  switch(color) {
-    case 'red':
-      return 'ff0000';
-      break;
-    case 'green':
-      return '008000';
-      break;
-    case 'blue':
-      return '0000ff';
-      break;  
-    case 'yellow':
-      return 'ffff00';
-      break;                  
-    case 'pink':
-      return 'ffc0cb';
-      break; 
-    default:
-      return 'ffffff';
+function blinkLoaded() {
+
+    // blinks orange twice on load
+    exec('blink1-tool --rgb ff9900 --blink 2').then(function(out) {
+        console.log(out.stdout, out.stderr);
+    }, function(err) {
+        console.error(err);
+    });  
+
+}
+
+function getEventColor(msg) {
+  switch(msg){
+    case 'twitter': return 'green';      
+    case 'github': return 'red';      
+    default: return 'blue';      
   }
 }
 
+function getrgb(color) {
+  switch(color) {
+    case 'red': return 'ff0000';
+    case 'green': return '008000';
+    case 'blue': return '0000ff';
+    case 'yellow': return 'ffff00';
+    case 'pink': return 'ffc0cb';
+    default: return 'ffffff';
+  }
+}
+
+function uint8arrayToString(myUint8Arr){
+   return String.fromCharCode.apply(null, myUint8Arr);
+}
+
+function printResultFor(op) {
+  return function printResult(err, res) {
+    if (err) console.log(op + ' error: ' + err.toString());
+    if (res) console.log(op + ' status: ' + res.constructor.name);
+  };
+}
