@@ -13,6 +13,13 @@ var deviceId = process.env.DEVICE_ID;
 var connectionString = 'HostName=' + iotHost +';DeviceId=' + deviceId + ';SharedAccessKey=' + deviceKey;
 var client = clientFromConnectionString(connectionString);
 
+// call the commabd differently if windows vs mac/linux
+var isWin = /^win/.test(process.platform);
+var blinkCmd = "blink1-tool";
+if (!isWin) {
+  blinkCmd = "./blink1-tool";
+}
+
 // blinks orange twice on load
 blinkLoaded()
 
@@ -38,7 +45,7 @@ client.open(connectCallback);
 // Let's Blink
 function blink(color) {
 
-    exec('blink1-tool --rgb ' + getrgb(color) + ' --glimmer=3').then(function(out) {
+    exec(blinkCmd + ' --rgb ' + getrgb(color) + ' --glimmer=3').then(function(out) {
         console.log(out.stdout);
     }, function(err) {      
         // uncomment to see full error
@@ -51,7 +58,7 @@ function blink(color) {
 function blinkLoaded() {
 
     // blinks orange twice on load
-    exec('blink1-tool --rgb ff9900 --blink 2').then(function(out) {
+    exec(blinkCmd + ' --rgb ff9900 --blink 2').then(function(out) {
         console.log(out.stdout, out.stderr);
     }, function(err) {
         console.error(err);
