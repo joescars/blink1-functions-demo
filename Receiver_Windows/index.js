@@ -23,11 +23,11 @@ var connectCallback = function (err) {
     console.log('Client connected');
     client.on('message', function (msg) {
         var msgText = uint8arrayToString(msg.data);
-        console.log('Id: ' + msg.messageId + ' Body: ' + msgText);
+        console.log('Body: ' + msgText);
         client.complete(msg, printResultFor('completed'));
         
         // Call the Blink Tool
-        blink(getEventColor(msgText));      
+        blink(getEventColor(msgText));
 
     });    
   }
@@ -39,9 +39,11 @@ client.open(connectCallback);
 function blink(color) {
 
     exec('blink1-tool --rgb ' + getrgb(color) + ' --glimmer=3').then(function(out) {
-        console.log(out.stdout, out.stderr);
-    }, function(err) {
-        console.error(err);
+        console.log(out.stdout);
+    }, function(err) {      
+        // uncomment to see full error
+        // console.error(err);
+        console.error("Blink is currently in use");
     });
 
 }
