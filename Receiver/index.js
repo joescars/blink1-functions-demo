@@ -70,6 +70,7 @@ function getEventColor(msg) {
   switch(msg){
     case 'twitter': return 'green';      
     case 'github': return 'red';      
+    case 'wunderlist': return 'orange';
     default: return 'blue';      
   }
 }
@@ -81,6 +82,7 @@ function getrgb(color) {
     case 'blue': return '0000ff';
     case 'yellow': return 'ffff00';
     case 'pink': return 'ffc0cb';
+    case 'orange': return 'ffa500';
     default: return 'ffffff';
   }
 }
