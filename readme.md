@@ -66,7 +66,7 @@ Rename *.env-sample* to *.env* and put in your IoT Hub settings that we saved ea
 
 Open the index.js file. You will see that we are pulling these settings securely from your .env file to create a connection string to our IoT Hub and start receiving messagines. 
 
-```
+```javascript
 var iotHost = process.env.IOT_HOST;
 var deviceKey = process.env.DEVICE_KEY;
 var deviceId = process.env.DEVICE_ID;
