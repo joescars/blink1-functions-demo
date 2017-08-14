@@ -263,12 +263,17 @@ Now let's fire off your Function App with some test data to see if it works. Fro
 
 ![Test Function](_static/024-test-function.png)
 
+You should see something similar in your log files and your Blink(1) device will light up green! 
 
+![Test Blink](_static/025-first-blink.png)
+
+4. Create a Logic Apps to Trigger on Events. 
+
+Now that everything is setup, the final step is for us to create a Logic App that calls our Function when a certain criteria is met. 
 
 ## Workshop (coming soon) ## 
 
 TODO: Create Azure CLI Version
-TODO: Save IoTHub Connection String (IoTHubOwner)
 
 ## Resources ##
 
