@@ -37,6 +37,10 @@ Click on your IoT Hub and take note of your *Hostname*. Copy it to a text file a
 
 ![IoT Hub Host](_static/005-iot-hub-host.png)
 
+In addition we will need the IoT Hub Connection string. To get this, click on "Shared Access Policies" then "iothubowner" and then save your connection string as we will be using this later. 
+
+![IoT Hub Connection](_static/005a-iot-hub-connection.png)
+
 Select "Device Explorer" from the left column and then click "Add"
 
 ![Device Explorer](_static/006-device-explorer.png)
@@ -231,6 +235,33 @@ Scroll down to "App Settings" and add a new one called "IoTHubConnection" with y
 
 ![IoT Hub App Setting](_static/023-save-app-settings.png)
 
+The final step is that we need to install the npm packages. Click on "Platform Features", then "console" and enter.Note; this may take a few minutes to run. 
+
+```
+npm install
+```
+
+![NPM Install Console](_static/023a-npm-install.png)
+
+Now let's go ahead and test this to make sure everything up to this point is working. 
+
+To do this we are going to test your Function App which will send a message to IoT Hub, which will then send a Cloud-To-Device message to the simulator and make the Blink(1) blink! 
+
+First, lets load the simulator. If you recall we need to type in the following from the "Receiver" folder. 
+
+```javascript
+node index.js
+```
+
+Now let's fire off your Function App with some test data to see if it works. From the previous screen click "Test" and put in the following code. Click Run. 
+
+```json
+{
+    "msg":"twitter"
+}
+```
+
+![Test Function](_static/024-test-function.png)
 
 
 
